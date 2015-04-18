@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>841</width>
+    <width>992</width>
     <height>464</height>
    </rect>
   </property>
@@ -19,14 +19,31 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/find/img/find.png</normaloff>:/find/img/find.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QGroupBox" name="groupBox">
+          <property name="maximumSize">
+           <size>
+            <width>450</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <family>Lato</family>
@@ -44,14 +61,24 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="fromCity"/>
-           </item>
            <item row="0" column="2">
             <widget class="QDateEdit" name="fromDate"/>
            </item>
-           <item row="0" column="3">
-            <widget class="QComboBox" name="fromTime"/>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="fromCity">
+             <property name="maximumSize">
+              <size>
+               <width>300</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QDateEdit" name="toDate"/>
+           </item>
+           <item row="1" column="3">
+            <widget class="QComboBox" name="toTime"/>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_2">
@@ -61,19 +88,29 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLineEdit" name="toCity"/>
+            <widget class="QLineEdit" name="toCity">
+             <property name="maximumSize">
+              <size>
+               <width>300</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
            </item>
-           <item row="1" column="2">
-            <widget class="QDateEdit" name="toDate"/>
-           </item>
-           <item row="1" column="3">
-            <widget class="QComboBox" name="toTime"/>
+           <item row="0" column="3">
+            <widget class="QComboBox" name="fromTime"/>
            </item>
           </layout>
          </widget>
         </item>
         <item>
          <widget class="QGroupBox" name="groupBox_2">
+          <property name="maximumSize">
+           <size>
+            <width>275</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <family>Lato</family>
@@ -92,7 +129,42 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="flightNumber"/>
+            <widget class="QLineEdit" name="flightNumber">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Find</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QPushButton" name="findButton">
+             <property name="text">
+              <string>Find</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -114,8 +186,18 @@
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <widget class="QPushButton" name="modifyFlights">
+             <property name="minimumSize">
+              <size>
+               <width>135</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="text">
               <string>Modify my flights</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/modify/img/modify.png</normaloff>:/modify/img/modify.png</iconset>
              </property>
              <property name="default">
               <bool>false</bool>
@@ -126,9 +208,13 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="checkIn">
+            <widget class="QPushButton" name="checkin">
              <property name="text">
               <string>Check In</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/checkin/img/checkin.png</normaloff>:/checkin/img/checkin.png</iconset>
              </property>
             </widget>
            </item>
@@ -151,7 +237,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="label_5">
         <property name="text">
          <string/>
         </property>
