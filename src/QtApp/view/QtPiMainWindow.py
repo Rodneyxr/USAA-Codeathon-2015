@@ -2,7 +2,7 @@
 import sys
 from PyQt4 import QtGui, QtCore
 from QtApp.view.mainwindow import Ui_mainwindow
-from QtApp.view.CalendarDialog import CalendarDialog
+from QtApp.view.calendardialog import CalendarDialog
 from QtApp.view.ReviewModify import ReviewModify
 from PyQt4.QtCore import QDateTime
 
@@ -37,7 +37,7 @@ class QtPiMainWindow(QtGui.QMainWindow):
     
     #Sends the controller the id of the booked flight
     def sendBooked(self):
-        if selectedRow is not None:
+        if self.selectedRow is not None:
             self.bookSignal.emit(self.selectedRow)
 
     #Retrieves the ID from the selected row.
