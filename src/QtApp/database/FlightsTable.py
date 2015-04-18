@@ -29,7 +29,7 @@ class FlightQueryNames:
    #generates database field strings
    #outputs in same order as genTags      
    def genFields():
-      QN = FieldQueryNames
+      QN = FlightQueryNames
       yield QN.flightIDField
       yield QN.originField
       yield QN.destField
@@ -40,7 +40,7 @@ class FlightQueryNames:
    #generates database tag strings
    #outputs in same order as genFields
    def genTags():
-      QN = FieldQueryNames
+      QN = FlightQueryNames
       yield QN.flightIDTag
       yield QN.originTag
       yield QN.destTag
@@ -49,13 +49,13 @@ class FlightQueryNames:
       yield QN.availSeatsTag
    
    def genFieldsTagsZip():
-      QN = FieldQueryNames
-      yield (QN.flightIDField,QN.flightIDTag)$
-      yield (QN.originField,QN.originTag)$
-      yield (QN.destField,QN.destTag)$
-      yield (QN.departTimeField,QN.departTimeTag)$
-      yield (QN.arriveTimeField,QN.arriveTimeTag)$
-      yield (QN.availSeatsField,QN.availSeatsTag)$
+      QN = FlightQueryNames
+      yield (QN.flightIDField,QN.flightIDTag)
+      yield (QN.originField,QN.originTag)
+      yield (QN.destField,QN.destTag)
+      yield (QN.departTimeField,QN.departTimeTag)
+      yield (QN.arriveTimeField,QN.arriveTimeTag)
+      yield (QN.availSeatsField,QN.availSeatsTag)
 
 
 class QueryError(Exception):

@@ -3,12 +3,11 @@ from PyQt4.QtCore import QPyNullVariant
 from QtApp.database.Database import Database
 from QtApp.database.FlightsTable import FlightsQueryNames as FQN
 from QtApp.database.FlightsTable import QueryError 
-
-#TODO change this import
-from QtApp.database.flightsClass import flightsClass
+from QtApp.model.FlightClass import FlightsClass
 
 class UserDB:
    def getFlights():
+      db = Database.getDatabase()
 
    def retrieveUser(username):
       db = Database.getDatabase()
@@ -58,33 +57,5 @@ class FlightQuery(QSqlQuery):
             index = rec.indexOf(field)
             resultDict[field] = self.value(index)
             flights.append(Flights(**resultDict))
-
-
-   def getUser(self,username):
-      self.prepare(self.getUserQuery)
-      self.bindValue(QN.usernameTag,username)
       
-      succeeded = self.exec_()
-      if(not succeeded):
-         lastError = self.lastError().text()
-         raise QueryError(lastError)
-
-      rec = self.record()
-      if(not self.next()):
-         self.clear()
-         raise NoSuchUser(username)
-
-      resultDict = {}
-      for field in QN.genFields():
-         index = rec.indexOf(field)
-         if(index == -1):
-            continue
-
-         value = query.value(index)
-         if(type(value) is QPyNullVariant):
-            value = ''
-
-         resultDict[field] = value
-      
-      self.clear()
-      return resultDict
+      return flights
