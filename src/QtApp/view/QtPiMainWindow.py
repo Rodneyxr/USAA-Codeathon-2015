@@ -44,8 +44,8 @@ class QtPiMainWindow(QtGui.QMainWindow):
     def sendSearchData(self):
         fromStr = self.win.fromCity.text()
         toStr = self.win.toCity.text()
-        fromDateObj = self.win.fromDate.date
-        toDateObj = self.win.toDate.date
+        fromDateObj = self.win.fromDate.date()
+        toDateObj = self.win.toDate.date()
         fromTimeObj = self.win.fromTime.currentText()
         toTimeObj = self.win.toTime.currentText()
         self.searchSignal.emit(fromStr, toStr, fromDateObj, toDateObj, 
