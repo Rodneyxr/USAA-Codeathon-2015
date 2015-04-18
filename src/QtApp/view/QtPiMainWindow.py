@@ -4,9 +4,11 @@ from PyQt4 import QtGui, QtCore
 from QtApp.view.mainwindow import Ui_mainwindow
 from PyQt4.QtCore import QDateTime
 
-#TODO: The method I want for inserting items into the QComboBox is 
-#insertItems. I need to figure out datetime atm.
 class QtPiMainWindow(QtGui.QMainWindow):
+    #Signal for entering the from/to/dates/whatever
+    #Passes a slot these parameters in this order:
+    #fromString, toString, fromDateObj, toDateObj, fromTimeObj, toTimeObj
+    searchSignal = QtCore.pyqtSignal(str, str, object, object, object, object)
     def __init__(self, model):
         super(QtPiMainWindow, self).__init__()
         self.model = model
@@ -16,6 +18,7 @@ class QtPiMainWindow(QtGui.QMainWindow):
         self.win = Ui_mainwindow()
         self.win.setupUi(self)
         self.win.flightStatusTable.setModel(self.model.getDepartureListModel())
+        self.win.findButton.clicked.connect(self.sendSearchData)
         self.fillDropDates()
 
     #Fills in the times for the dropdown menu, from 12:00AM to 12:00PM, 
@@ -37,3 +40,15 @@ class QtPiMainWindow(QtGui.QMainWindow):
         [i.toString("hh:mm") for i in self.timeList if i is not None])
         self.win.toTime.insertItems(0, 
         [i.toString("hh:mm") for i in self.timeList if i is not None])
+    #TODO: create slot for listening to "Find" buttonclicked signal.
+    def sendSearchData(self):
+        print("i'm alive!")
+        fromStr = self.win.fromCity.text()
+        toStr = self.win.fromCity.text()
+        fromDateObj = self.win.fromDate.date
+        toDateObj = self.win.toDate.date
+        fromTimeObj = self.win.fromTime.currentText()
+        toTimeObj = self.win.toTime.currentText()
+        print(fromStr, toStr, fromDateObj, toDateObj, fromTimeObj, toTimeObj)
+        self.searchSignal.emit(fromStr, toStr, fromDateObj, toDateObj, 
+                            fromTimeObj, toTimeObj)
