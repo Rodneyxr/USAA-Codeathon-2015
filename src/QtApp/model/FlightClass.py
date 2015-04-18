@@ -1,4 +1,4 @@
-from QtApp.database.FlightsTable import FlightQueryNames as FQN
+from QtPiApp.database.FlightsTable import FlightQueryNames as FQN
 
 class Flights:
    #FlightID,FlightOrigin,FlightDestination, Departure, Arrival,UnoccupiedSeats
@@ -55,5 +55,5 @@ class Flights:
       self.arrival = arrival
     
     #Setting UnoccupiedSeats
-   def setUnoccupiedSeats(self,unoccupiedSeats):
+   def setUnoccupiedSeats(self,flightID):
       self.unoccupiedSeats = unoccupiedSeats
