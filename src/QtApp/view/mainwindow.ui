@@ -6,15 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>720</height>
+    <width>841</width>
+    <height>464</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>1280</width>
-    <height>720</height>
-   </size>
   </property>
   <property name="maximumSize">
    <size>
@@ -26,26 +20,156 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableView" name="flightStatusTable">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1271</width>
-      <height>691</height>
-     </rect>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1280</width>
-     <height>20</height>
-    </rect>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="font">
+           <font>
+            <family>Lato</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Book</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>From</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="fromCity"/>
+           </item>
+           <item row="0" column="2">
+            <widget class="QDateEdit" name="fromDate"/>
+           </item>
+           <item row="0" column="3">
+            <widget class="QComboBox" name="fromTime"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>To</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="toCity"/>
+           </item>
+           <item row="1" column="2">
+            <widget class="QDateEdit" name="toDate"/>
+           </item>
+           <item row="1" column="3">
+            <widget class="QComboBox" name="toTime"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="font">
+           <font>
+            <family>Lato</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>Check Status</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Flight #</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="flightNumber"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="font">
+           <font>
+            <family>Lato</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>My Account</string>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QPushButton" name="modifyFlights">
+             <property name="text">
+              <string>Modify my flights</string>
+             </property>
+             <property name="default">
+              <bool>false</bool>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="checkIn">
+             <property name="text">
+              <string>Check In</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTableView" name="flightStatusTable">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
