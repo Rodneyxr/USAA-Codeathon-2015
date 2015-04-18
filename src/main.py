@@ -13,10 +13,6 @@ def main():
     view = QtView(model)
     controller = QtController(model, view)
 
-    # tableWidget = QtGui.QTableView()
-    # tableWidget.setModel(model.getDepartureListModel())
-    # tableWidget.show()
-
     sys.exit(app.exec_())
 
 

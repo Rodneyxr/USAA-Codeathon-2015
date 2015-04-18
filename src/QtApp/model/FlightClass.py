@@ -1,6 +1,7 @@
 from QtApp.database.FlightsTable import FlightQueryNames as FQN
 import datetime
 
+
 class Flight:
     # FlightID,FlightOrigin,FlightDestination, Departure, Arrival,UnoccupiedSeats
     def __init__(self, **kwargs):
@@ -11,14 +12,6 @@ class Flight:
         self.data.append(kwargs[FQN.departTimeField])  # 3
         self.data.append(kwargs[FQN.arriveTimeField])  # 4
         self.data.append(kwargs[FQN.availSeatsField])  # 5
-
-        # self.flightID = kwargs[FQN.flightIDField]
-        # self.flightOrigin = kwargs[FQN.originField]
-        # self.flightDestination = kwargs[FQN.destField]
-        # self.departure = kwargs[FQN.departTimeField]
-        # self.arrival = kwargs[FQN.arriveTimeField]
-        # self.unoccupiedSeats = kwargs[FQN.availSeatsField]
-        # self.size = len(kwargs)
 
     # Return FlightID
     def getFlightID(self):
@@ -68,9 +61,6 @@ class Flight:
     # Setting UnoccupiedSeats
     def setUnoccupiedSeats(self, unoccupiedSeats):
         self.data[5] = unoccupiedSeats
-
-    def constructDateTime(self, time):
-        datetime.datetime.strptime(time, QtModel.FMT)
 
     def __len__(self):
         return len(self.data)
