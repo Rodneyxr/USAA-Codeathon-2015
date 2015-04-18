@@ -5,36 +5,14 @@ from QtApp.database.FlightsTable import FlightsQueryNames as FQN
 from QtApp.database.FlightsTable import QueryError 
 from QtApp.model.FlightClass import FlightsClass
 
-class UserDB:
+class FlightsDB:
+   """Gateway to flights table in qtpi database"""
+
    def getFlights():
       db = Database.getDatabase()
+      query = FlightQuery(db)
+      return query.getFlights()
 
-   def retrieveUser(username):
-      db = Database.getDatabase()
-      query = CustomerQuery(db)
-      resultDict = query.getUser(username)
-      return resultDict
-
-   def addUser(**kwargs):
-      db = Database.getDatabase()
-      transaction = db.transaction()
-      if(not transaction):
-         return False
-
-      query = CustomerQuery(db)
-      try:
-         query.addUser(**kwargs)
-      except Exception as e:
-         db.rollback()
-         raise e
-
-      commited = db.commit()
-      if(not commited):
-         db.rollback()
-
-      return commited
-
-#function queries
 class FlightQuery(QSqlQuery):
    getFlightQuery = "SELECT * FROM {0}".format(FQN.tableName)
 
