@@ -85,8 +85,6 @@ class QtPiMainWindow(QtGui.QMainWindow):
         toStr = self.win.toCity.text()
         ###NOTE: fromDate and toDate are being changed to buttons that activate
         #dialogs
-        fromDateObj = self.win.fromDate.date()
-        toDateObj = self.win.toDate.date()
         #fromTimeObj = self.win.fromTime.currentText()
         #toTimeObj = self.win.toTime.currentText()
         self.searchSignal.emit(fromStr, toStr, fromDateObj, toDateObj, 
