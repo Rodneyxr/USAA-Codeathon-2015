@@ -8,18 +8,18 @@ from QtApp.model.FlightClass import Flight
 class FlightsDB:
    """Gateway to flights table in qtpi database"""
 
-   def bookFlight(flightID):
+   def bookFlight(flightID,custID):
       db = Database.getDatabase()
       db.transaction()
       query = FlightQuery(db)
-      query.bookFlight(flightID)
+      query.bookFlight(flightID,custID)
       db.commit()
 
-   def killFlight(flightID):
+   def killFlight(flightID,custID):
       db = Database.getDatabase()
       db.transaction()
       query = FlightQuery(db)
-      query.killFlight(flightID)
+      query.killFlight(flightID,custID)
       db.commit()
 
    def getFlights():
@@ -74,11 +74,11 @@ class FlightQuery(QSqlQuery):
          lastError = self.lastError().text()
          raise QueryError(lastError)
 
-   def bookFlight(self,flightID):
+   def bookFlight(self,flightID,custID):
       query = self.bookFlightQuery.format(':custID',':flightID')
       
       self.prepare(query)
-      self.bindValue(':custID','1')
+      self.bindValue(':custID',str(custID))
       self.bindValue(':flightID',str(flightID))
 
       succeeded = self.exec_()
@@ -88,11 +88,11 @@ class FlightQuery(QSqlQuery):
 
       self.__decFlightSeats__(flightID)
 
-   def killFlight(self,flightID):
+   def killFlight(self,flightID,custID):
       query = self.killFlightQuery.format(':custID',':flightID')
       
       self.prepare(query)
-      self.bindValue(':custID','1')
+      self.bindValue(':custID',str(custID))
       self.bindValue(':flightID',str(flightID))
 
       succeeded = self.exec_()

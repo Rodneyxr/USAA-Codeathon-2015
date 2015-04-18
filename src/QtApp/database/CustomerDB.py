@@ -6,23 +6,49 @@ from QtApp.database.FlightsTable import QueryError
 from QtApp.model.FlightClass import Flight
 
 class CustomerDB:
-   def getFlights():
+   def authUser(username,password):
       db = Database.getDatabase()
       query = CustomerQuery(db)
-      return query.getFlights()
+      custID = query.authUser(username,password)
+      return custID
+
+   def getFlights(custID):
+      db = Database.getDatabase()
+      query = CustomerQuery(db)
+      return query.getFlights(custID)
 
 #function queries
 class CustomerQuery(QSqlQuery):
+   authUserQuery = "SELECT CustID FROM Customer WHERE UserName = :username AND PassHash = :passhash"
    getBFlightsQuery = """SELECT Flights.* FROM Customer
     LEFT JOIN BookedFlights ON Customer.CustID = BookedFlights.CustID
     LEFT JOIN Flights ON Flights.FlightID = BookedFlights.FlightID
-    WHERE Customer.CustID = 1"""
+    WHERE Customer.CustID = :custID"""
 
    def __init__(self,database):
       super().__init__(database)
      
-   def getFlights(self):
+   def authUser(self,username,passHash):
+      self.prepare(self.authUserQuery)
+      self.bindValue(":username",username)
+      self.bindValue(":passHash",passHash)
+
+      succeeded = self.exec_()
+      if(not succeeded):
+         lastError = self.lastError().text()
+         raise QueryError(lastError)
+      
+      rec = self.record()
+      custID = -1
+      if(self.next()):
+         index = rec.indexOf('CustId')
+         custID = self.value(index)
+
+      return custID
+
+   def getFlights(self,custID):
       self.prepare(self.getBFlightsQuery)
+      self.bindValue(":custID",str(custID))
 
       succeeded = self.exec_()
       if(not succeeded):
