@@ -8,6 +8,20 @@ from QtApp.model.FlightClass import Flight
 class FlightsDB:
    """Gateway to flights table in qtpi database"""
 
+   def bookFlight(flightID):
+      db = Database.getDatabase()
+      db.transaction()
+      query = FlightQuery(db)
+      query.bookFlight(flightID)
+      db.commit()
+
+   def killFlight(flightID):
+      db = Database.getDatabase()
+      db.transaction()
+      query = FlightQuery(db)
+      query.killFlight(flightID)
+      db.commit()
+
    def getFlights():
       db = Database.getDatabase()
       query = FlightQuery(db)
@@ -30,10 +44,64 @@ class FlightsDB:
 
 class FlightQuery(QSqlQuery):
    getFlightQuery = "SELECT * FROM {0}".format(FQN.tableName)
+   bookFlightQuery = "INSERT INTO BookedFlights (CustID,FlightID) VALUES ({0},{1})"
+   decFlightQuery = "UPDATE Flights SET UnoccupiedSeats = UnoccupiedSeats - 1 WHERE FlightID = {0}"
+   killFlightQuery = "DELETE FROM  BookedFlights WHERE CustID = {0} AND FlightID = {1}"
+   incFlightQuery = "UPDATE Flights SET UnoccupiedSeats = UnoccupiedSeats + 1 WHERE FlightID = {0}"
 
    def __init__(self,database):
       super().__init__(database)
+
+   def __decFlightSeats__(self,flightID):
+      query = self.decFlightQuery.format(':flightID')
+
+      self.prepare(query)
+      self.bindValue(':flightID',str(flightID))
+
+      succeeded = self.exec_()
+      if(not succeeded):
+         lastError = self.lastError().text()
+         raise QueryError(lastError)
+
+   def __incFlightSeats__(self,flightID):
+      query = self.incFlightQuery.format(':flightID')
+
+      self.prepare(query)
+      self.bindValue(':flightID',str(flightID))
+
+      succeeded = self.exec_()
+      if(not succeeded):
+         lastError = self.lastError().text()
+         raise QueryError(lastError)
+
+   def bookFlight(self,flightID):
+      query = self.bookFlightQuery.format(':custID',':flightID')
       
+      self.prepare(query)
+      self.bindValue(':custID','1')
+      self.bindValue(':flightID',str(flightID))
+
+      succeeded = self.exec_()
+      if(not succeeded):
+         lastError = self.lastError().text()
+         raise QueryError(lastError)
+
+      self.__decFlightSeats__(flightID)
+
+   def killFlight(self,flightID):
+      query = self.killFlightQuery.format(':custID',':flightID')
+      
+      self.prepare(query)
+      self.bindValue(':custID','1')
+      self.bindValue(':flightID',str(flightID))
+
+      succeeded = self.exec_()
+      if(not succeeded):
+         lastError = self.lastError().text()
+         raise QueryError(lastError)
+
+      self.__incFlightSeats__(flightID)
+
    def getFlights(self):
       self.prepare(self.getFlightQuery)
 
