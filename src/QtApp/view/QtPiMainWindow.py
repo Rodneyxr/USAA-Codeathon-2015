@@ -31,7 +31,7 @@ class QtPiMainWindow(QtGui.QMainWindow):
     
     #Retrieves the ID from the selected row
     def grabID(self, item):
-        print(item.row())
+        print((item.row() + 1)) #Adding one because row() starts at zero.
         self.idSignal.emit(item.row())
 
     #Wrappers for calSelect because I'm dumb
