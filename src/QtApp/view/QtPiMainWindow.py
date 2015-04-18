@@ -42,13 +42,11 @@ class QtPiMainWindow(QtGui.QMainWindow):
         [i.toString("hh:mm") for i in self.timeList if i is not None])
     #TODO: create slot for listening to "Find" buttonclicked signal.
     def sendSearchData(self):
-        print("i'm alive!")
         fromStr = self.win.fromCity.text()
-        toStr = self.win.fromCity.text()
+        toStr = self.win.toCity.text()
         fromDateObj = self.win.fromDate.date
         toDateObj = self.win.toDate.date
         fromTimeObj = self.win.fromTime.currentText()
         toTimeObj = self.win.toTime.currentText()
-        print(fromStr, toStr, fromDateObj, toDateObj, fromTimeObj, toTimeObj)
         self.searchSignal.emit(fromStr, toStr, fromDateObj, toDateObj, 
                             fromTimeObj, toTimeObj)
