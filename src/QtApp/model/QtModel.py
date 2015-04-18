@@ -2,6 +2,7 @@ from PyQt4 import QtCore
 
 from QtApp.model.FlightModel import FlightStatusTable
 from QtApp.database.FlightsDB import FlightsDB
+from QtApp.database.CustomerDB import CustomerDB
 
 # bookFlight
 class QtModel(QtCore.QObject):
@@ -12,11 +13,24 @@ class QtModel(QtCore.QObject):
         self.flights = data
         self.__departureList = FlightStatusTable(self.flights, self.header)
 
+        data = CustomerDB.getFlights()
+        self.cust_flights = data
+        self.__customerList = FlightStatusTable(self.cust_flights, self.header)
+
     def getDepartureListModel(self):
         return self.__departureList
 
+    def getBookedListModel(self):
+        return self.__customerList
+
     def addFlight(self, flight):
         self.flights.append(flight)
+
+    def bookFlight(self, flight_id):
+        FlightsDB.bookFlight(flight_id)
+
+    def killFlight(self, flight_id):
+        FlightsDB.killFlight(flight_id)
 
     def searchFlights(self, fromLocation, toLocation, fromDate, toDate, fromTime, toTime):
         flightsResult = FlightsDB.searchFlightsArrivalDeparture(fromDate, toDate)
