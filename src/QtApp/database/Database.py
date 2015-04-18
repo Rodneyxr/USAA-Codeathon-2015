@@ -3,11 +3,11 @@ from PyQt4.QtSql import QSqlDatabase
 #Creates a singleton database object
 class Database:
    qtpiDB = None
-   hostName = "localhost"
+   hostName = "rodneyxr.com"
    port = 3306
    dbName = "qtpi"
-   username = "lava"
-   password = "tritium13"
+   username = "codeathon_team"
+   password = "codeathon"
    dbType = "QMYSQL"
    connection = "connection1"
 
