@@ -2,6 +2,7 @@ import sys
 from PyQt4 import QtGui
 from QtApp.view.calendar_dialog_ui import Ui_calDialog
 
+
 class CalendarDialog(QtGui.QDialog):
     def __init__(self):
         super(CalendarDialog, self).__init__()
