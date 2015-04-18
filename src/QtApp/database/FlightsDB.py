@@ -13,14 +13,20 @@ class FlightsDB:
       query = FlightQuery(db)
       return query.getFlights()
    
-   def searchFlightsArrival(self,arrival):
-      return flights
+   def searchFlightsArrival(arrival):
+      db = Database.getDatabase()
+      query = FlightQuery(db)
+      return query.searchFlightsArrival(arrival)
    
-   def searchFlightsDeparture(self,departure):
-      return flights
+   def searchFlightsDeparture(departure):
+      db = Database.getDatabase()
+      query = FlightQuery(db)
+      return query.searchFlightsDeparture(departure) 
    
-   def searchFlightsArrivalDeparture(self,arrival,departure):
-      return flights
+   def searchFlightsArrivalDeparture(arrival,departure):
+      db = Database.getDatabase()
+      query = FlightQuery(db)
+      return query.searchFlightsArrivalDeparture(arrival,departure) 
 
 class FlightQuery(QSqlQuery):
    getFlightQuery = "SELECT * FROM {0}".format(FQN.tableName)
@@ -49,12 +55,84 @@ class FlightQuery(QSqlQuery):
       return flights
 
    def searchFlightsArrival(self,arrival):
-      time = arrival.time()
-      date = 
+      query = self.getFlightQuery
+      date = arrival.toString(1)
+      query += " WHERE DATE({0}) = {1}".format(FQN.arriveTimeField,FQN.arriveDateTag)
+
+      self.prepare(query)
+      self.bindValue(FQN.arriveDateTag,date)
+
+      succeeded = self.exec_()
+      if(not succeeded):
+         lastError = self.lastError().text()
+         raise QueryError(lastError)
+
+      flights = []
+      rec = self.record()
+      while(self.next()):
+         resultDict = {}
+         for field in FQN.genFields():
+            index = rec.indexOf(field)
+            resultDict[field] = self.value(index)
+
+         flights.append(Flight(**resultDict))
+      
       return flights
    
    def searchFlightsDeparture(self,departure):
+      query = self.getFlightQuery
+      date = departure.toString(1)
+      query += " WHERE DATE({0}) = {1}".format(FQN.departTimeField,FQN.departDateTag)
+      
+      self.prepare(query)
+      self.bindValue(FQN.departDateTag,date)
+
+      succeeded = self.exec_()
+      if(not succeeded):
+         lastError = self.lastError().text()
+         raise QueryError(lastError)
+
+      flights = []
+      rec = self.record()
+      while(self.next()):
+         resultDict = {}
+         for field in FQN.genFields():
+            index = rec.indexOf(field)
+            resultDict[field] = self.value(index)
+
+         flights.append(Flight(**resultDict))
+      
       return flights
    
    def searchFlightsArrivalDeparture(self,arrival,departure):
+      query = "{0} WHERE DATE({1}) = {2} AND DATE({3}) = {4}".format(
+              self.getFlightQuery,
+              FQN.arriveTimeField,
+              FQN.arriveDateTag,
+              FQN.departTimeField,
+              FQN.departDateTag
+            )
+
+      aDate = arrival.toString(1)
+      dDate = departure.toString(1)
+
+      self.prepare(query)
+      self.bindValue(FQN.arriveDateTag,aDate)
+      self.bindValue(FQN.departDateTag,dDate)
+
+      succeeded = self.exec_()
+      if(not succeeded):
+         lastError = self.lastError().text()
+         raise QueryError(lastError)
+
+      flights = []
+      rec = self.record()
+      while(self.next()):
+         resultDict = {}
+         for field in FQN.genFields():
+            index = rec.indexOf(field)
+            resultDict[field] = self.value(index)
+
+         flights.append(Flight(**resultDict))
+      
       return flights

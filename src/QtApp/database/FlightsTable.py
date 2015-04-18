@@ -22,8 +22,10 @@ class FlightQueryNames:
    flightIDTag = ":flightID"
    originTag = ":origin"
    destTag = ":destination"
-   departTimeTag = ":departure" 
-   arriveTimeTag = ":arrival"
+   departTimeTag = ":departTime"
+   departDateTag = ":departDate" 
+   arriveTimeTag = ":arrivalTime"
+   arriveDateTag = ":arrivalDate"
    availSeatsTag = ":seats"
 
    #generates database field strings
