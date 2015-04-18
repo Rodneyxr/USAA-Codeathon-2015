@@ -47,7 +47,7 @@ class QtPiMainWindow(QtGui.QMainWindow):
         self.idSignal.emit(item.row())
     #Selects the entire row upon mouseclick
     def selectRow(self, item):
-        self.selectedRow = self.sender().selectRow(item.row()) + 1
+        self.selectedRow = self.sender().selectRow(item.row())
 
     #Wrappers for calSelect because I'm dumb
     def wrapFrom(self):  
