@@ -87,5 +87,5 @@ class QtPiMainWindow(QtGui.QMainWindow):
         #dialogs
         #fromTimeObj = self.win.fromTime.currentText()
         #toTimeObj = self.win.toTime.currentText()
-        self.searchSignal.emit(fromStr, toStr, fromDateObj, toDateObj, 
+        self.searchSignal.emit(fromStr, toStr, self.fromDateObj, self.toDateObj, 
                             self.fromTimeObj, self.toTimeObj)
