@@ -26,7 +26,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QListView" name="flightStatusTable">
+   <widget class="QTableView" name="flightStatusTable">
     <property name="geometry">
      <rect>
       <x>0</x>

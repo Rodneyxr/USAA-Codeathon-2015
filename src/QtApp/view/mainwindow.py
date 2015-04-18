@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Fri Apr 17 23:12:33 2015
+# Created: Fri Apr 17 23:16:33 2015
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,7 +31,7 @@ class Ui_mainwindow(object):
         mainwindow.setMaximumSize(QtCore.QSize(1920, 1080))
         self.centralwidget = QtGui.QWidget(mainwindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-        self.flightStatusTable = QtGui.QListView(self.centralwidget)
+        self.flightStatusTable = QtGui.QTableView(self.centralwidget)
         self.flightStatusTable.setGeometry(QtCore.QRect(0, 0, 1271, 691))
         self.flightStatusTable.setObjectName(_fromUtf8("flightStatusTable"))
         mainwindow.setCentralWidget(self.centralwidget)
