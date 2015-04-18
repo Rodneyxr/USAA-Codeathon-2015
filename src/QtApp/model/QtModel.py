@@ -33,7 +33,15 @@ class QtModel(QtCore.QObject):
         FlightsDB.killFlight(flight_id)
 
     def searchFlights(self, fromLocation, toLocation, fromDate, toDate, fromTime, toTime):
-        flightsResult = FlightsDB.searchFlightsArrivalDeparture(fromDate, toDate)
+        if toDate is None and fromDate is None:
+            print("You must select a date!")
+            return
+        if toDate is None:
+            flightsResult = FlightsDB.searchFlightsArrival(fromDate)
+        elif fromDate is None:
+            flightsResult = FlightsDB.searchFlightsDeparture(toDate)
+        else:
+            flightsResult = FlightsDB.searchFlightsArrivalDeparture(fromDate, toDate)
         if fromLocation == '' and toLocation == '':
             self.__departureList.setFlightList(flightsResult)
             return
