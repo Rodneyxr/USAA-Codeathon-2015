@@ -3,7 +3,7 @@ import sys
 
 from PyQt4 import QtCore, QtGui
 from hashlib import sha256
-
+import datetime
 
 class Test(unittest.TestCase):
     """
@@ -24,7 +24,6 @@ class Test(unittest.TestCase):
     def test_hash(self):
         password = "password01"
         print(sha256(str(password).encode('utf-8')).hexdigest())
-
 
 if __name__ == '__main__':
     unittest.main()

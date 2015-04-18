@@ -1,59 +1,76 @@
-from QtPiApp.database.FlightsTable import FlightQueryNames as FQN
+from QtApp.database.FlightsTable import FlightQueryNames as FQN
+import datetime
 
-class Flights:
-   #FlightID,FlightOrigin,FlightDestination, Departure, Arrival,UnoccupiedSeats
-   def __init__(self,**kwargs):
-      self.flightID = kwargs[FQN.flightIDField]
-      self.flightOrigin = kwargs[FQN.originField]
-      self.flightDestination = kwargs[FQN.destinationField]
-      self.departure = kwargs[FQN.departTimeField]
-      self.arrival = kwargs[FQN.arriveTimeField]
-      self.unoccupiedSeats= kwargs[FQN.availSeatsField]
+class Flight:
+    # FlightID,FlightOrigin,FlightDestination, Departure, Arrival,UnoccupiedSeats
+    def __init__(self, **kwargs):
+        self.data = list()
+        self.data.append(kwargs[FQN.flightIDField])  # 0
+        self.data.append(kwargs[FQN.originField])  # 1
+        self.data.append(kwargs[FQN.destField])  # 2
+        self.data.append(kwargs[FQN.departTimeField])  # 3
+        self.data.append(kwargs[FQN.arriveTimeField])  # 4
+        self.data.append(kwargs[FQN.availSeatsField])  # 5
 
-    #Return FlightID
-   def getFlightID(self):
-      return self.flightID
+        # self.flightID = kwargs[FQN.flightIDField]
+        # self.flightOrigin = kwargs[FQN.originField]
+        # self.flightDestination = kwargs[FQN.destField]
+        # self.departure = kwargs[FQN.departTimeField]
+        # self.arrival = kwargs[FQN.arriveTimeField]
+        # self.unoccupiedSeats = kwargs[FQN.availSeatsField]
+        # self.size = len(kwargs)
 
-    #Return FlightOrigin
-   def getFlightOrigin(self):
-      return self.flightOrigin
+    # Return FlightID
+    def getFlightID(self):
+        return self.data[0]
 
-    #Return FlightDestination
-   def getFlightDestination(self):
-      return self.flightDestination
+        # Setting FlightID
 
-    #Return Departure time
-   def getDeparture(self):
-      return self.departure
+    def setFlightID(self, flightID):
+        self.data[0] = flightID
 
-    #Return Arrival time
-   def getArrival(self):
-      return self.arrival
+    # Return FlightOrigin
+    def getFlightOrigin(self):
+        return self.data[1]
 
-    #Return UnoccupiedSeats  
-   def getUnoccupiedSeats(self):
-      return self.unoccupiedSeats
+    # Setting FlightOrigin
+    def setFlightOrigin(self, flightOrigin):
+        self.data[1] = flightOrigin
 
-    #Setting FlightID
-   def setFlightID(self,flightID):
-      self.flightID = flightID
+    # Return FlightDestination
+    def getFlightDestination(self):
+        return self.data[2]
 
-    #Setting FlightOrigin
-   def setFlightOrigin(self,flightOrigin):
-      self.flightOrigin = flightOrigin
-  
-    #Setting FlightDestination  
-   def setFlightDestination(self,flightDestination):
-      self.flightDestination = flightDestination
-  
-    #Setting Departure time
-   def setDeparture(self,departure):
-      self.departure = departure
-    
-    #Setting Arrival time     
-   def setArrival(self,arrival):
-      self.arrival = arrival
-    
-    #Setting UnoccupiedSeats
-   def setUnoccupiedSeats(self,flightID):
-      self.unoccupiedSeats = unoccupiedSeats
+    # Setting FlightDestination
+    def setFlightDestination(self, flightDestination):
+        self.data[2] = flightDestination
+
+    # Return Departure time
+    def getDeparture(self):
+        return self.data[3]
+
+    # Setting Departure time
+    def setDeparture(self, departure):
+        self.data[3] = departure
+
+    # Return Arrival time
+    def getArrival(self):
+        return self.data[4]
+
+    # Setting Arrival time
+    def setArrival(self, arrival):
+        self.data[4] = arrival
+
+    # Return UnoccupiedSeats
+    def getUnoccupiedSeats(self):
+        return self.data[5]
+
+    # Setting UnoccupiedSeats
+    def setUnoccupiedSeats(self, unoccupiedSeats):
+        self.data[5] = unoccupiedSeats
+
+    def constructDateTime(self, time):
+        datetime.datetime.strptime(time, QtModel.FMT)
+
+    def __len__(self):
+        return len(self.data)

@@ -7,7 +7,7 @@ class FlightStatusTable(QtCore.QAbstractTableModel):
         This AbstractTableModel implementation will contain all data to be
         displayed by a TableWidget.
 
-        :param data_in: a list of lists
+        :param data_in: a list of flights
         :param header_data: a list of strings
         :param parent: None
         :return: None
@@ -27,7 +27,7 @@ class FlightStatusTable(QtCore.QAbstractTableModel):
             return None
         elif role != QtCore.Qt.DisplayRole:
             return None
-        return self.array_data[index.row()][index.column()]
+        return self.array_data[index.row()].data[index.column()]
 
     def headerData(self, col, orientation, role):
         if orientation == QtCore.Qt.Horizontal and role == QtCore.Qt.DisplayRole:
