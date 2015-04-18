@@ -16,4 +16,4 @@ class ReviewModify(QtGui.QWidget):
         self.review.table.setModel(model.getBookedListModel())
     
     def clearSelected(self, item):
-        self.signalClear.emit(item.row())
+        self.signalClear.emit(self.review.table.clearSelection())

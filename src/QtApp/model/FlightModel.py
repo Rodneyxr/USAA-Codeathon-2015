@@ -38,3 +38,6 @@ class FlightStatusTable(QtCore.QAbstractTableModel):
     def setFlightList(self, flightList):
         self.array_data = flightList
         self.reset()
+
+    def getFlightList(self):
+        return self.array_data

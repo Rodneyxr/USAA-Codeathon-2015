@@ -48,12 +48,14 @@ class QtPiMainWindow(QtGui.QMainWindow):
     #Sends the controller the id of the booked flight
     def sendBooked(self):
         if self.selectedRow is not None:
+            print("here")
             self.bookSignal.emit(self.selectedRow)
 
     #Retrieves the ID from the selected row.
     #Emits a signal that allows for the controller to get the flight.
     def grabID(self, item):
         print((item.row())) #Adding one because row() starts at zero.
+        self.selectedRow = item.row()
         self.idSignal.emit(item.row())
     #Selects the entire row upon mouseclick
     def selectRow(self, item):

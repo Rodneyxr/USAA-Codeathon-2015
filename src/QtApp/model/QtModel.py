@@ -23,11 +23,14 @@ class QtModel(QtCore.QObject):
     def getBookedListModel(self):
         return self.__customerList
 
-    def addFlight(self, flight):
-        self.flights.append(flight)
+    def addFlight(self, flight_id):
+        id = self.__customerList.getFlightList()[flight_id].getFlightID()
+        FlightsDB.bookFlight(id)
+        self.__customerList.reset()
 
     def bookFlight(self, flight_id):
-        FlightsDB.bookFlight(flight_id)
+        id = self.__departureList.getFlightList()[flight_id].getFlightID()
+        FlightsDB.bookFlight(id)
 
     def killFlight(self, flight_id):
         FlightsDB.killFlight(flight_id)
