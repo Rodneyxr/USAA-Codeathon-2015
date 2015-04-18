@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'calendardialog.ui'
 #
-# Created: Sat Apr 18 06:13:54 2015
+# Created: Sat Apr 18 06:22:55 2015
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,16 +27,12 @@ class Ui_calDialog(object):
     def setupUi(self, calDialog):
         calDialog.setObjectName(_fromUtf8("calDialog"))
         calDialog.resize(400, 300)
-        self.verticalLayoutWidget = QtGui.QWidget(calDialog)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(50, 40, 266, 174))
-        self.verticalLayoutWidget.setObjectName(_fromUtf8("verticalLayoutWidget"))
-        self.verticalLayout = QtGui.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setMargin(0)
+        self.verticalLayout = QtGui.QVBoxLayout(calDialog)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.calendarWidget = QtGui.QCalendarWidget(self.verticalLayoutWidget)
+        self.calendarWidget = QtGui.QCalendarWidget(calDialog)
         self.calendarWidget.setObjectName(_fromUtf8("calendarWidget"))
         self.verticalLayout.addWidget(self.calendarWidget)
-        self.checkBox = QtGui.QDialogButtonBox(self.verticalLayoutWidget)
+        self.checkBox = QtGui.QDialogButtonBox(calDialog)
         self.checkBox.setOrientation(QtCore.Qt.Horizontal)
         self.checkBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
         self.checkBox.setObjectName(_fromUtf8("checkBox"))

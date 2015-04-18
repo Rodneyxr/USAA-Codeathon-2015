@@ -27,13 +27,17 @@ class QtPiMainWindow(QtGui.QMainWindow):
         self.win.fromDate.clicked.connect(self.wrapFrom)
         self.win.toDate.clicked.connect(self.wrapTo)
         self.win.flightStatusTable.clicked.connect(self.grabID)
+        self.win.flightStatusTable.clicked.connect(self.selectRow)
         self.fillDropDates()
     
     #Retrieves the ID from the selected row.
     #Emits a signal that allows for the controller 
     def grabID(self, item):
         print((item.row() + 1)) #Adding one because row() starts at zero.
-        self.idSignal.emit(item.row())
+        self.idSignal.emit(item.row() + 1)
+    #Selects the entire row upon mouseclick
+    def selectRow(self, item):
+        self.sender().selectRow(item.row())
 
     #Wrappers for calSelect because I'm dumb
     def wrapFrom(self):  
