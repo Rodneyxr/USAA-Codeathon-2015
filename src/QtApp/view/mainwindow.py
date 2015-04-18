@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Fri Apr 17 21:49:40 2015
+# Created: Fri Apr 17 22:34:20 2015
 #      by: PyQt4 UI code generator 4.11.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -23,15 +23,22 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_MainWindow(object):
+class Ui_mainwindow(object):
     def setupUi(self, mainwindow):
         mainwindow.setObjectName(_fromUtf8("mainwindow"))
-        mainwindow.setGeometry(QtCore.QRect(0, 0, 800, 600))
+        mainwindow.resize(1280, 720)
+        mainwindow.setMinimumSize(QtCore.QSize(1280, 720))
+        mainwindow.setMaximumSize(QtCore.QSize(1920, 1080))
         self.centralwidget = QtGui.QWidget(mainwindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+        self.tableWidget = QtGui.QTableWidget(self.centralwidget)
+        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 1271, 691))
+        self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
+        self.tableWidget.setColumnCount(0)
+        self.tableWidget.setRowCount(0)
         mainwindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(mainwindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 20))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 20))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         mainwindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(mainwindow)
@@ -42,5 +49,5 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(mainwindow)
 
     def retranslateUi(self, mainwindow):
-        mainwindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        mainwindow.setWindowTitle(_translate("mainwindow", "MainWindow", None))
 
