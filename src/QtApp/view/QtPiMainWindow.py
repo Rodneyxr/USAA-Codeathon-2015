@@ -10,6 +10,7 @@ class QtPiMainWindow(QtGui.QMainWindow):
     #Passes a slot these parameters in this order:
     #fromString, toString, fromDateObj, toDateObj, fromTimeObj, toTimeObj
     searchSignal = QtCore.pyqtSignal(str, str, object, object, object, object)
+    idSignal = QtCore.pyqtSignal(int)
     def __init__(self, model):
         super(QtPiMainWindow, self).__init__()
         self.model = model
@@ -25,11 +26,18 @@ class QtPiMainWindow(QtGui.QMainWindow):
         self.win.checkButton.clicked.connect(self.sendSearchData)
         self.win.fromDate.clicked.connect(self.wrapFrom)
         self.win.toDate.clicked.connect(self.wrapTo)
+        self.win.flightStatusTable.clicked.connect(self.grabID)
         self.fillDropDates()
     
+    #Retrieves the ID from the selected row
+    def grabID(self, item):
+        print(item.row())
+        self.idSignal.emit(item.row())
+
     #Wrappers for calSelect because I'm dumb
     def wrapFrom(self):  
         self.calSelect("fromDate")
+
     def wrapTo(self):
         self.calSelect("toDate")
     #Display the calendar dialog
