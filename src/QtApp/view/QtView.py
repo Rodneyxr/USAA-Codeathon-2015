@@ -8,8 +8,9 @@ from PyQt4 import QtGui, QtCore
 from QtApp.view.QtPiMainWindow import QtPiMainWindow
 
 class QtView(QtCore.QObject):
-    def __init__(self):
+    def __init__(self, model):
         super(QtView, self).__init__()
+        self.model = model
         self.initUI()
 
     def initUI(self):

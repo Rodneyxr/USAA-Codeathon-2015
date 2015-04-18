@@ -3,9 +3,9 @@ import sys
 from PyQt4 import QtGui
 from QtApp.view.mainwindow import Ui_MainWindow
 
-class QtPiMainWindow(QtGui.None):
+class QtPiMainWindow(QtGui.QMainWindow):
     def __init__(self):
-        super(View, self).__init__()
+        super(QtPiMainWindow, self).__init__()
         self.initUI()
 
     def initUI(self):

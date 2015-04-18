@@ -2,18 +2,16 @@ import sys
 
 from PyQt4 import QtCore, QtGui
 from QtApp.model.QtModel import QtModel
+from QtApp.view.QtView import QtView
+from QtApp.controller.QtController import QtController
 
 
 def main():
     app = QtGui.QApplication(sys.argv)
 
     model = QtModel()
-
-
-    # This is just for testing right now
-    mainWindow = QtGui.QMainWindow()
-    mainWindow.show()
-    # mainWindow.showFullScreen()
+    view = QtView(model)
+    controller = QtController(model, view)
 
     sys.exit(app.exec_())
 
