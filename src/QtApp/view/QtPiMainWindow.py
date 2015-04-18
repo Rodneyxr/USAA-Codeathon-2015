@@ -22,7 +22,7 @@ class QtPiMainWindow(QtGui.QMainWindow):
         self.whichButton = ""
         self.selectedRow = None
         self.cal = CalendarDialog()
-        self.rev = ReviewModify()
+        self.rev = ReviewModify(self.model)
         self.cal.diag.calendarWidget.clicked.connect(self.setDate)
         self.win = Ui_mainwindow()
         self.win.setupUi(self)
