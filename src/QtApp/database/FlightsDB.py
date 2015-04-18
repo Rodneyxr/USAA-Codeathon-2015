@@ -13,14 +13,14 @@ class FlightsDB:
       query = FlightQuery(db)
       return query.getFlights()
    
-   def searchFlightsArrival(self,arrival):
-      return flights
-   
-   def searchFlightsDeparture(self,departure):
-      return flights
-   
-   def searchFlightsArrivalDeparture(self,arrival,departure):
-      return flights
+   # def searchFlightsArrival(self,arrival):
+   #    return flights
+   #
+   # def searchFlightsDeparture(self,departure):
+   #    return flights
+   #
+   # def searchFlightsArrivalDeparture(self,arrival,departure):
+   #    return flights
 
 class FlightQuery(QSqlQuery):
    getFlightQuery = "SELECT * FROM {0}".format(FQN.tableName)
@@ -48,13 +48,13 @@ class FlightQuery(QSqlQuery):
       
       return flights
 
-   def searchFlightsArrival(self,arrival):
-      time = arrival.time()
-      date = 
-      return flights
-   
-   def searchFlightsDeparture(self,departure):
-      return flights
-   
-   def searchFlightsArrivalDeparture(self,arrival,departure):
-      return flights
+   # def searchFlightsArrival(self,arrival):
+   #    time = arrival.time()
+   #    date =
+   #    return flights
+   #
+   # def searchFlightsDeparture(self,departure):
+   #    return flights
+   #
+   # def searchFlightsArrivalDeparture(self,arrival,departure):
+   #    return flights

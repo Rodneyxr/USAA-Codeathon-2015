@@ -21,17 +21,20 @@ class QtModel(QtCore.QObject):
         #               QtCore.QDateTime(2015, 12, 16, 20, 0), 42]]
 
         data = FlightsDB.getFlights()
-        self.flights = list()
+        self.flights = data
 
-        for i in range(len(data)):
-            tmpFlight = self.createFlight(
-                self.data[i][0],
-                self.data[i][1],
-                self.data[i][2],
-                self.data[i][3],
-                self.data[i][4],
-                self.data[i][5])
-            self.addFlight(tmpFlight)
+        # for flight in data():
+        #
+        #
+        # for i in range(len(data)):
+        #     tmpFlight = self.createFlight(
+        #         data[0],
+        #         data[1],
+        #         data[i][2],
+        #         data[i][3],
+        #         data[i][4],
+        #         data[i][5])
+        #     self.addFlight(tmpFlight)
 
         self.__departureList = FlightStatusTable(self.flights, self.header)
 
