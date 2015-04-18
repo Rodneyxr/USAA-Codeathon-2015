@@ -13,6 +13,8 @@ class QtPiMainWindow(QtGui.QMainWindow):
     searchSignal = QtCore.pyqtSignal(str, str, object, object, object, object)
     idSignal = QtCore.pyqtSignal(int)
     bookSignal = QtCore.pyqtSignal(int)
+    swapMod = QtCore.pyqtSignal()
+    swapMain = QtCore.pyqtSignal()
     def __init__(self, model):
         super(QtPiMainWindow, self).__init__()
         self.model = model
@@ -21,6 +23,8 @@ class QtPiMainWindow(QtGui.QMainWindow):
     def initUI(self):
         self.whichButton = ""
         self.selectedRow = None
+        self.toDateObj = None #init these to none just in case
+        self.fromDateObj = None
         self.cal = CalendarDialog()
         self.rev = ReviewModify(self.model)
         self.cal.diag.calendarWidget.clicked.connect(self.setDate)
@@ -33,8 +37,14 @@ class QtPiMainWindow(QtGui.QMainWindow):
         self.win.flightStatusTable.clicked.connect(self.grabID)
         self.win.flightStatusTable.clicked.connect(self.selectRow)
         self.win.bookButton.clicked.connect(self.sendBooked)
+        self.win.modifyFlights.clicked.connect(self.goMod)
+        self.rev.review.backToMain.clicked.connect(self.goMain)
         self.fillDropDates()
     
+    def goMod(self):
+        self.swapMod.emit()
+    def goMain(self):
+        self.swapMain.emit()
     #Sends the controller the id of the booked flight
     def sendBooked(self):
         if self.selectedRow is not None:

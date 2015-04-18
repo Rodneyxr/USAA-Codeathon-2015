@@ -18,14 +18,17 @@ class QtView(QtCore.QObject):
         self.mainscreen = QtPiMainWindow(self.model)
         self.modifyscreen = ReviewModify(self.model)
         self.mainscreen.show()
-        self.modifyscreen.review.cancelSelected.clicked.connect(self.toModify)
+        self.mainscreen.swapMod.connect(self.toModify)
+        self.mainscreen.swapMain.connect(self.toMain)
         self.modifyscreen.review.backToMain.clicked.connect(self.toMain)
         # self.mainscreen.win.flightStatusTable.setModel(self.model.getDepartureListModel())
 
     def toModify(self):
+        print("in toModify")
         self.mainscreen.hide()
         self.modifyscreen.show()
 
     def toMain(self):
+        print("in toMain")
         self.modifyscreen.hide()
         self.mainscreen.show()
