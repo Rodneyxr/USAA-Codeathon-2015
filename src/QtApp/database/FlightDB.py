@@ -4,6 +4,9 @@ from QtApp.database.Database import Database
 from QtApp.database.FlightsTable import FlightsQueryNames as FQN
 from QtApp.database.FlightsTable import QueryError 
 
+#TODO change this import
+from QtApp.database.flightsClass import flightsClass
+
 class UserDB:
    def getFlights():
 
@@ -48,10 +51,14 @@ class FlightQuery(QSqlQuery):
          raise QueryError(lastError)
 
       rec = self.record()
-      if(not self.next()):
-         return None
+      flights = []
+      while(self.next()):
+         resultDict = {}
+         for field in FQN.genFields():
+            index = rec.indexOf(field)
+            resultDict[field] = self.value(index)
+            flights.append(Flights(**resultDict))
 
-      
 
    def getUser(self,username):
       self.prepare(self.getUserQuery)
