@@ -1,11 +1,11 @@
-from QtPiApp.database.FlightsTable import FlightQueryNames as FQN
+from QtApp.database.FlightsTable import FlightQueryNames as FQN
 
 class Flights:
    #FlightID,FlightOrigin,FlightDestination, Departure, Arrival,UnoccupiedSeats
    def __init__(self,**kwargs):
       self.flightID = kwargs[FQN.flightIDField]
       self.flightOrigin = kwargs[FQN.originField]
-      self.flightDestination = kwargs[FQN.destinationField]
+      self.flightDestination = kwargs[FQN.destField]
       self.departure = kwargs[FQN.departTimeField]
       self.arrival = kwargs[FQN.arriveTimeField]
       self.unoccupiedSeats= kwargs[FQN.availSeatsField]
