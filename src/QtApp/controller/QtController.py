@@ -10,6 +10,6 @@ class QtController(QtCore.QObject):
         self.view.mainscreen.searchSignal.connect(self.searchFlights)
 
     def searchFlights(self, fromLocation, toLocation, fromDate, toDate, fromTime, toTime):
-        print("hello")
+        self.model.searchFlights(fromLocation, toLocation, fromDate, toDate, fromTime, toTime)
         # fromDateTime = QtCore.QDateTime(fromDate, fromTime)
         # toDateTime = QtCore.QDateTime(toDate, toTime)

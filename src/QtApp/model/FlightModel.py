@@ -20,6 +20,8 @@ class FlightStatusTable(QtCore.QAbstractTableModel):
         return len(self.array_data)
 
     def columnCount(self, parent) -> int:
+        if (len(self.array_data) == 0):
+            return 0
         return len(self.array_data[0])
 
     def data(self, index, role):
@@ -32,3 +34,7 @@ class FlightStatusTable(QtCore.QAbstractTableModel):
     def headerData(self, col, orientation, role):
         if orientation == QtCore.Qt.Horizontal and role == QtCore.Qt.DisplayRole:
             return self.header_data[col]
+
+    def setFlightList(self, flightList):
+        self.array_data = flightList
+        self.reset()
