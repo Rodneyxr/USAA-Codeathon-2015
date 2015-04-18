@@ -1,15 +1,21 @@
 import sys
 
 from PyQt4 import QtCore, QtGui
+from QtApp.model.QtModel import QtModel
+from QtApp.view.QtView import QtView
+from QtApp.controller.QtController import QtController
 
 
 def main():
     app = QtGui.QApplication(sys.argv)
 
-    # This is just for testing right now
-    mainWindow = QtGui.QMainWindow()
-    mainWindow.show()
-    # mainWindow.showFullScreen()
+    model = QtModel()
+    view = QtView(model)
+    controller = QtController(model, view)
+
+    # tableWidget = QtGui.QTableView()
+    # tableWidget.setModel(model.getDepartureListModel())
+    # tableWidget.show()
 
     sys.exit(app.exec_())
 
