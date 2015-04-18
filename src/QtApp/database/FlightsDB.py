@@ -3,7 +3,7 @@ from PyQt4.QtCore import QPyNullVariant
 from QtApp.database.Database import Database
 from QtApp.database.FlightsTable import FlightQueryNames as FQN
 from QtApp.database.FlightsTable import QueryError 
-from QtApp.model.FlightClass import Flights
+from QtApp.model.FlightClass import Flight
 
 class FlightsDB:
    """Gateway to flights table in qtpi database"""
@@ -44,11 +44,13 @@ class FlightQuery(QSqlQuery):
             index = rec.indexOf(field)
             resultDict[field] = self.value(index)
 
-         flights.append(Flights(**resultDict))
+         flights.append(Flight(**resultDict))
       
       return flights
 
    def searchFlightsArrival(self,arrival):
+      time = arrival.time()
+      date = 
       return flights
    
    def searchFlightsDeparture(self,departure):
