@@ -1,12 +1,33 @@
 from PyQt4 import QtCore
 
-class DepartureList(QtCore.QAbstractTableModel):
 
-    def __init__(self):
-        QtCore.QAbstractTableModel.__init__(self)
+class FlightStatusTable(QtCore.QAbstractTableModel):
+    def __init__(self, data_in, header_data, parent=None):
+        """
+        This AbstractTableModel implementation will contain all data to be
+        displayed by a TableWidget.
 
-    def rowCount(self) -> int:
-        return 0
+        :param data_in: a list of lists
+        :param header_data: a list of strings
+        :param parent: None
+        :return: None
+        """
+        QtCore.QAbstractTableModel.__init__(self, parent)
+        self.array_data = data_in
+        self.header_data = header_data
 
-    def columnCount(self) -> int:
-        return 0
+    def rowCount(self, parent) -> int:
+        return len(self.array_data)
+
+    def columnCount(self, parent) -> int:
+        return len(self.array_data[0])
+
+    def data(self, index, role):
+        if not index.isValid():
+            return QtCore.QVariant()
+        elif role != QtCore.Qt.DisplayRole:
+            return QtCore.QVariant()
+
+    def headerData(self, col, orientation, role):
+        if orientation == QtCore.Qt.Horizontal and role == QtCore.Qt.DisplayRole:
+            return QtCore.QVariant(self.header_data[col])

@@ -14,5 +14,6 @@ class QtView(QtCore.QObject):
         self.initUI()
 
     def initUI(self):
-        self.mainscreen = QtPiMainWindow()
+        self.mainscreen = QtPiMainWindow(self.model)
         self.mainscreen.show()
+        # self.mainscreen.win.flightStatusTable.setModel(self.model.getDepartureListModel())
