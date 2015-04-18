@@ -2,6 +2,7 @@
 import sys
 from PyQt4 import QtGui, QtCore
 from QtApp.view.mainwindow import Ui_mainwindow
+from QtApp.view.CalendarDialog import CalendarDialog
 from PyQt4.QtCore import QDateTime
 
 class QtPiMainWindow(QtGui.QMainWindow):
@@ -15,11 +16,36 @@ class QtPiMainWindow(QtGui.QMainWindow):
         self.initUI()
 
     def initUI(self):
+        self.whichButton = ""
+        self.cal = CalendarDialog()
+        self.cal.diag.calendarWidget.clicked.connect(self.setDate)
         self.win = Ui_mainwindow()
         self.win.setupUi(self)
         self.win.flightStatusTable.setModel(self.model.getDepartureListModel())
-        self.win.findButton.clicked.connect(self.sendSearchData)
+        self.win.checkButton.clicked.connect(self.sendSearchData)
+        self.win.fromDate.clicked.connect(self.wrapFrom)
+        self.win.toDate.clicked.connect(self.wrapTo)
         self.fillDropDates()
+    
+    #Wrappers for calSelect because I'm dumb
+    def wrapFrom(self):  
+        self.calSelect("fromDate")
+    def wrapTo(self):
+        self.calSelect("toDate")
+    #Display the calendar dialog
+    def calSelect(self, text):
+        self.whichButton = text
+        self.cal.exec_()
+
+    def setDate(self, date):
+        if self.whichButton == "fromDate":
+            self.fromDateObj = date
+            self.win.fromDate.setText(date.toString())
+        else:
+            print(self.sender().objectName())
+            self.toDateObj = date
+            self.win.toDate.setText(date.toString())
+        
 
     #Fills in the times for the dropdown menu, from 12:00AM to 12:00PM, 
     #in 30 minute intervals.
@@ -44,9 +70,11 @@ class QtPiMainWindow(QtGui.QMainWindow):
     def sendSearchData(self):
         fromStr = self.win.fromCity.text()
         toStr = self.win.toCity.text()
+        ###NOTE: fromDate and toDate are being changed to buttons that activate
+        #dialogs
         fromDateObj = self.win.fromDate.date()
         toDateObj = self.win.toDate.date()
-        fromTimeObj = self.win.fromTime.currentText()
-        toTimeObj = self.win.toTime.currentText()
+        #fromTimeObj = self.win.fromTime.currentText()
+        #toTimeObj = self.win.toTime.currentText()
         self.searchSignal.emit(fromStr, toStr, fromDateObj, toDateObj, 
-                            fromTimeObj, toTimeObj)
+                            self.fromTimeObj, self.toTimeObj)
