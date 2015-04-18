@@ -29,7 +29,8 @@ class QtPiMainWindow(QtGui.QMainWindow):
         self.win.flightStatusTable.clicked.connect(self.grabID)
         self.fillDropDates()
     
-    #Retrieves the ID from the selected row
+    #Retrieves the ID from the selected row.
+    #Emits a signal that allows for the controller 
     def grabID(self, item):
         print((item.row() + 1)) #Adding one because row() starts at zero.
         self.idSignal.emit(item.row())
