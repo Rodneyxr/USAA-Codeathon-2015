@@ -22,7 +22,21 @@
     </widget>
    </item>
    <item>
-    <widget class="QTableView" name="table"/>
+    <widget class="QPushButton" name="backToMain">
+     <property name="text">
+      <string>Back to Main Window</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableView" name="table">
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -3,6 +3,7 @@ import sys
 from PyQt4 import QtGui, QtCore
 from QtApp.view.mainwindow import Ui_mainwindow
 from QtApp.view.CalendarDialog import CalendarDialog
+from QtApp.view.ReviewModify import ReviewModify
 from PyQt4.QtCore import QDateTime
 
 class QtPiMainWindow(QtGui.QMainWindow):
@@ -11,6 +12,7 @@ class QtPiMainWindow(QtGui.QMainWindow):
     #fromString, toString, fromDateObj, toDateObj, fromTimeObj, toTimeObj
     searchSignal = QtCore.pyqtSignal(str, str, object, object, object, object)
     idSignal = QtCore.pyqtSignal(int)
+    bookSignal = QtCore.pyqtSignal(int)
     def __init__(self, model):
         super(QtPiMainWindow, self).__init__()
         self.model = model
@@ -18,7 +20,9 @@ class QtPiMainWindow(QtGui.QMainWindow):
 
     def initUI(self):
         self.whichButton = ""
+        self.selectedRow = None
         self.cal = CalendarDialog()
+        self.rev = ReviewModify()
         self.cal.diag.calendarWidget.clicked.connect(self.setDate)
         self.win = Ui_mainwindow()
         self.win.setupUi(self)
@@ -28,16 +32,22 @@ class QtPiMainWindow(QtGui.QMainWindow):
         self.win.toDate.clicked.connect(self.wrapTo)
         self.win.flightStatusTable.clicked.connect(self.grabID)
         self.win.flightStatusTable.clicked.connect(self.selectRow)
+        self.win.bookButton.clicked.connect(self.sendBooked)
         self.fillDropDates()
     
+    #Sends the controller the id of the booked flight
+    def sendBooked(self):
+        if selectedRow is not None:
+            self.bookSignal.emit(self.selectedRow)
+
     #Retrieves the ID from the selected row.
-    #Emits a signal that allows for the controller 
+    #Emits a signal that allows for the controller to get the flight.
     def grabID(self, item):
-        print((item.row() + 1)) #Adding one because row() starts at zero.
-        self.idSignal.emit(item.row() + 1)
+        print((item.row())) #Adding one because row() starts at zero.
+        self.idSignal.emit(item.row())
     #Selects the entire row upon mouseclick
     def selectRow(self, item):
-        self.sender().selectRow(item.row())
+        self.selectedRow = self.sender().selectRow(item.row()) + 1
 
     #Wrappers for calSelect because I'm dumb
     def wrapFrom(self):  
