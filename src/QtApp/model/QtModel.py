@@ -1,5 +1,5 @@
 from PyQt4 import QtCore
-from QtApp.model.Departures import FlightStatusTable
+from QtApp.model.FlightModel import FlightStatusTable
 
 
 class QtModel(QtCore.QObject):

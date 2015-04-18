@@ -24,10 +24,11 @@ class FlightStatusTable(QtCore.QAbstractTableModel):
 
     def data(self, index, role):
         if not index.isValid():
-            return QtCore.QVariant()
+            return None
         elif role != QtCore.Qt.DisplayRole:
-            return QtCore.QVariant()
+            return None
+        return self.array_data[index.row()][index.column()]
 
     def headerData(self, col, orientation, role):
         if orientation == QtCore.Qt.Horizontal and role == QtCore.Qt.DisplayRole:
-            return QtCore.QVariant(self.header_data[col])
+            return self.header_data[col]
